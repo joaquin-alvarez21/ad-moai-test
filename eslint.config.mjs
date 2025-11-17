@@ -13,6 +13,15 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // Reglas más flexibles para archivos de testing
+  {
+    files: ["**/*.test.ts", "**/*.test.tsx", "**/vitest.setup.ts", "**/mocks/**"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-unused-vars": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

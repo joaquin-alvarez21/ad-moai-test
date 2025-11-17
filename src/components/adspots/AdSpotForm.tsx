@@ -58,6 +58,10 @@ export function AdSpotForm() {
   /**
    * Maneja el envío del formulario.
    * Convierte los valores del formulario a FormData y llama a la Server Action.
+   * 
+   * Nota: Se usa async/await dentro de startTransition, lo cual es soportado
+   * para Server Actions. El estado isPending se rastrea automáticamente mientras
+   * la promesa de la Server Action esté pendiente.
    */
   const onSubmit: SubmitHandler<AdSpotCreatePayload> = async (values) => {
     // Convertir los valores a FormData para mantener compatibilidad con la Server Action

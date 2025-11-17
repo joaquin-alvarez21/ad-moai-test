@@ -58,16 +58,20 @@ export function AdSpotListItem({ adSpot }: { adSpot: AdSpot }) {
    * La actualización optimista debe estar dentro de startTransition
    * para que React la maneje correctamente y evite el error de actualización
    * fuera de una transición.
+   * 
+   * Nota: Se usa async/await dentro de startTransition, lo cual es soportado
+   * para Server Actions. El estado isPending se rastrea automáticamente mientras
+   * la promesa de la Server Action esté pendiente.
    */
-  function handleDeactivate() {
+  async function handleDeactivate() {
     if (optimisticAdSpot.status === 'inactive') {
       toast.info('Este AdSpot ya está inactivo');
       return;
     }
 
-    // Envolver tanto la actualización optimista como la Server Action en startTransition
+    // Actualización optimista y Server Action dentro de startTransition
     startTransition(async () => {
-      // Actualización optimista dentro de la transición
+      // Actualización optimista
       setOptimisticAdSpot('inactive');
 
       // Ejecutar la Server Action

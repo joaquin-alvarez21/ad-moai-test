@@ -9,6 +9,7 @@ import type {
   AdSpotPlacement,
   AdSpotStatus,
 } from '@/lib/types/adspot';
+import * as yup from 'yup';
 
 /**
  * API Route: GET /api/adspots
@@ -86,11 +87,11 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     // Manejar errores de validación de yup
-    if (error instanceof Error && 'errors' in error) {
+    if (error instanceof yup.ValidationError) {
       return NextResponse.json(
         {
           error: 'Error de validación',
-          details: (error as { errors: string[] }).errors,
+          details: error.errors,
         },
         { status: 400 }
       );
