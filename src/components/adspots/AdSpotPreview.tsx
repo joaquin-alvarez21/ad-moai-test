@@ -51,7 +51,7 @@ export const AdSpotPreview = memo(function AdSpotPreview({
   const styles = getPlacementStyles();
 
   return (
-    <div className="relative w-full h-[600px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
+    <div className="relative w-full h-[600px] bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
       {/* Mock de pantalla móvil */}
       <div className="absolute inset-0 flex flex-col">
         {/* Barra de estado (mock) */}
@@ -89,7 +89,7 @@ export const AdSpotPreview = memo(function AdSpotPreview({
           {placement === 'map_view' && (
             <div className="relative w-full h-full">
               {/* Simulación de mapa */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-blue-100 dark:from-green-900 dark:to-blue-900">
+              <div className="absolute inset-0 bg-linear-to-br from-green-100 to-blue-100 dark:from-green-900 dark:to-blue-900">
                 <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-red-500 rounded-full" />
                 <div className="absolute top-1/2 right-1/4 w-3 h-3 bg-blue-500 rounded-full" />
                 <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-green-500 rounded-full" />
