@@ -2,7 +2,21 @@
 
 A Next.js application for managing mobility ad spots (Lane B — Frontend). Built with Next.js 16, TypeScript, and Shadcn UI.
 
+## 🚀 Live Demo
+
+**Vercel Deployment**: [https://ad-moai-test.vercel.app](https://ad-moai-test.vercel.app)
+
+> ⚠️ **Important**: The app is deployed on Vercel, but due to its serverless architecture, **created AdSpots won't persist**. For full functionality, use Docker or local development. See [Vercel Limitations](#️-vercel-limitations) below.
+
 ## Quick Start
+
+### Docker (Recommended)
+
+```bash
+docker-compose up --build
+```
+
+Open [http://localhost:3000](http://localhost:3000)
 
 ### Local Development
 
@@ -12,14 +26,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
-
-### Docker (One Command)
-
-```bash
-docker-compose up --build
-```
-
-The application will be available at [http://localhost:3000](http://localhost:3000)
 
 ## What Was Built
 
@@ -61,6 +67,20 @@ The application will be available at [http://localhost:3000](http://localhost:30
 - **No real backend**: Uses Next.js API routes with in-memory store
 - **Auto-refresh interval**: Fixed at 60 seconds (could be configurable)
 - **Image domains**: Currently allows any domain (should be restricted in production)
+
+## ⚠️ Vercel Limitations
+
+**The in-memory store doesn't persist data on Vercel** due to its serverless architecture.
+
+**Why?** Vercel uses ephemeral Lambda functions. Each request may execute on a different instance with its own memory, so created AdSpots "disappear" between requests.
+
+| Environment | Persistence | Why |
+|-------------|-------------|-----|
+| **Docker** | ✅ Works | Single continuous Node.js process |
+| **Local Dev** | ✅ Works | Single continuous Node.js process |
+| **Vercel** | ❌ Doesn't work | Multiple ephemeral Lambda instances |
+
+**To evaluate the app properly**, use Docker or local development where the in-memory store works as intended. For production on Vercel, you'd need real persistence (database, KV store, etc.).
 
 ## Testing
 
@@ -116,6 +136,7 @@ See configuration at [.github/workflows/test.yml](.github/workflows/test.yml)
 
 ## Routes
 
+- `/` - Redirects to `/adspots`
 - `/adspots` - List of AdSpots with filters and metrics
 - `/adspots/new` - Create new AdSpot
 - `/api/adspots` - REST API endpoints
